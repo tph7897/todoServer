@@ -4,7 +4,6 @@ import { readTodos, saveTodos } from "../utils/todoUtils.js";
 // res {[todo, todo ...];} 200
 export const getTodos = (req, res) => {
   const todos = readTodos();
-  console.log("todos", todos);
   res.status(200).json(todos);
 };
 
@@ -12,11 +11,8 @@ export const getTodos = (req, res) => {
 // res {[todo, todo ...];} 200
 export const filterTodos = (req, res) => {
   let todos = readTodos();
-  console.log("req", req);
   const findStatus = req.params.id;
-  console.log("findStatus", findStatus);
   todos = todos.filter((todo) => todo.status == findStatus);
-  console.log("todos", todos);
   res.status(200).json(todos);
 };
 
@@ -28,7 +24,7 @@ export const createTodo = (req, res) => {
   const { text } = req.body;
   const newTodo = {
     id: Date.now(),
-    status: "active",
+    status: "Active",
     text,
     createdAt: new Date().toISOString(),
   };
