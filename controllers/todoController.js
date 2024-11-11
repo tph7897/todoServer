@@ -4,6 +4,19 @@ import { readTodos, saveTodos } from "../utils/todoUtils.js";
 // res {[todo, todo ...];} 200
 export const getTodos = (req, res) => {
   const todos = readTodos();
+  console.log("todos", todos);
+  res.status(200).json(todos);
+};
+
+// todo 필터링 :id Active , Completed
+// res {[todo, todo ...];} 200
+export const filterTodos = (req, res) => {
+  let todos = readTodos();
+  console.log("req", req);
+  const findStatus = req.params.id;
+  console.log("findStatus", findStatus);
+  todos = todos.filter((todo) => todo.status == findStatus);
+  console.log("todos", todos);
   res.status(200).json(todos);
 };
 
@@ -37,7 +50,7 @@ export const updateTodo = (req, res) => {
   }
 
   // 상태 반전 함수
-  const toggleStatus = (status) => (status === "active" ? "completed" : "active");
+  const toggleStatus = (status) => (status === "Active" ? "Completed" : "Active");
 
   // 현재 할 일의 상태를 반전시킴
   todos[todoIndex].status = toggleStatus(todos[todoIndex].status);
